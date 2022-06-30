@@ -120,7 +120,7 @@ yarn add
 ---
 
 ## Implementation Required
-
+The Documentation can be found at /docs
 # Docker Image
 
 To run a docker image of Postgres and RabbitMQ
