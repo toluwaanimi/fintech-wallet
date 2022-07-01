@@ -104,6 +104,18 @@ export class TransactionsService {
       throw new BadRequestException('Insufficient balance');
     }
 
+    const userBalanceCalulator = await Helper.calculateBalanceAfter(
+      senderWallet.balance,
+      data.amount,
+    );
+
+    const receiverBalanceCalulator = await Helper.calculateBalanceAfter(
+      receiverWallet.balance,
+      data.amount,
+    );
+
+    const batchReference = Helper.generateReference('TRF_');
+
     const connection = getConnection();
     const queryRunner = connection.createQueryRunner();
     await queryRunner.connect();
@@ -136,6 +148,8 @@ export class TransactionsService {
           userId: user.id,
           tx_type: TransactionType.debit,
           status: PaymentStatus.success,
+          balance_before: userBalanceCalulator.balance_before,
+          balance_after: userBalanceCalulator.balance_after,
           amount: data.amount,
           description: `You sent ${receiver.first_name} with ${
             currency.symbol
@@ -143,20 +157,22 @@ export class TransactionsService {
           baseWalletId: currency.id,
           message: data.description,
           method: TransferMethodType.internal,
-          reference: Helper.generateReference('TRF_'),
+          reference: batchReference,
         },
         {
           userId: receiver.id,
           tx_type: TransactionType.credit,
           status: PaymentStatus.success,
           amount: data.amount,
+          balance_before: receiverBalanceCalulator.balance_before,
+          balance_after: receiverBalanceCalulator.balance_after,
           description: `You received ${currency.symbol}${
             data.amount / 100
           } from ${user.first_name} 💸`,
           message: data.description,
           baseWalletId: currency.id,
           method: TransferMethodType.internal,
-          reference: Helper.generateReference('TRF_'),
+          reference: batchReference,
         },
       ]);
       await queryRunner.commitTransaction();

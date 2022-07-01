@@ -22,6 +22,12 @@ export class UserTransactions extends AbstractEntity {
   @Column({ nullable: true, type: 'decimal', precision: 20, scale: 4 })
   amount: number;
 
+  @Column({ nullable: true, type: 'decimal', precision: 20, scale: 4 })
+  balance_before: number;
+
+  @Column({ nullable: true, type: 'decimal', precision: 20, scale: 4 })
+  balance_after: number;
+
   @Column({ nullable: true })
   provider_reference: string;
 
