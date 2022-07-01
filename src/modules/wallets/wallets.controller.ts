@@ -3,6 +3,7 @@ import { ApiOperation, ApiBearerAuth } from '@nestjs/swagger';
 import { GetCurrentUser } from '../../common/decorators/get-user.decorator';
 import { AuthGuard } from '../../common/guards/auth.guard';
 import { HttpResponse } from '../../common/helpers/response-handler.helper';
+import { IUser } from '../../common/interfaces/user.interface';
 import { User } from '../../models/user.entity';
 
 import { WalletsService } from './wallets.service';
@@ -16,7 +17,7 @@ export class WalletsController {
   @ApiOperation({ summary: 'Get user wallets' })
   @UseGuards(AuthGuard)
   @ApiBearerAuth()
-  async getWallets(@GetCurrentUser() user: User) {
+  async getWallets(@GetCurrentUser() user: IUser) {
     const response = await this.walletsService.getWallets(user);
     return HttpResponse.send('wallets retrieved', response);
   }
@@ -28,7 +29,7 @@ export class WalletsController {
   @ApiBearerAuth()
   async getWallet(
     @Param('walletId') walletId: string,
-    @GetCurrentUser() user: User,
+    @GetCurrentUser() user: IUser,
   ) {
     const response = await this.walletsService.getWallet(walletId, user);
     return HttpResponse.send('wallet retrieved', response);

@@ -74,7 +74,7 @@ describe('TransactionsController', () => {
         },
         {
           provide: WalletsService,
-          useClass: WalletsServiceMock,
+          useValue: WalletsServiceMock,
         },
       ],
     }).compile();

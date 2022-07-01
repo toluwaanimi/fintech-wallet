@@ -32,14 +32,11 @@ export class User extends AbstractEntity {
   @Column({ default: false })
   is_verified: boolean;
 
-  @Column({ array: false, type: 'json', default: {} })
-  kyc: any;
-
   @OneToMany(() => UserWallets, (wallet) => wallet.user)
-  wallet: UserWallets[];
+  wallet?: UserWallets[];
 
   @OneToMany(() => UserTransactions, (transaction) => transaction.user)
-  transaction: UserTransactions[];
+  transaction?: UserTransactions[];
 
   toJSON() {
     return {

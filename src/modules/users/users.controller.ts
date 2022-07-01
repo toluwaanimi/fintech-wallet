@@ -21,6 +21,7 @@ import {
 import { AuthGuard } from '../../common/guards/auth.guard';
 import { HttpResponse } from '../../common/helpers/response-handler.helper';
 import { User } from '../../models/user.entity';
+import { IUser } from '../../common/interfaces/user.interface';
 @Controller('')
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
@@ -50,7 +51,7 @@ export class UsersController {
   @UseGuards(AuthGuard)
   @ApiBearerAuth()
   @HttpCode(200)
-  async getProfile(@GetCurrentUser() user: User) {
+  async getProfile(@GetCurrentUser() user: IUser) {
     const response = await this.usersService.getProfile(user);
     return HttpResponse.send('profile retrieved', response);
   }
@@ -62,7 +63,7 @@ export class UsersController {
   @HttpCode(200)
   async changePassword(
     @Body() body: UpdatePasswordDTO,
-    @GetCurrentUser() user: User,
+    @GetCurrentUser() user: IUser,
   ) {
     await this.usersService.changePassword(body, user);
     return HttpResponse.send('password reset successful');
@@ -75,7 +76,7 @@ export class UsersController {
   @ApiBearerAuth()
   async setTransactionPin(
     @Body() body: SetTransactionPinDTO,
-    @GetCurrentUser() user: User,
+    @GetCurrentUser() user: IUser,
   ) {
     await this.usersService.setTransactionPin(body, user);
     return HttpResponse.send('transaction pin created');
@@ -88,7 +89,7 @@ export class UsersController {
   @HttpCode(200)
   async updateTransactionPin(
     @Body() body: UpdateTransactionPinDTO,
-    @GetCurrentUser() user: User,
+    @GetCurrentUser() user: IUser,
   ) {
     await this.usersService.updateTransactionPin(body, user);
     return HttpResponse.send('transaction pin updated');

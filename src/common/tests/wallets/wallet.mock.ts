@@ -1,12 +1,8 @@
 import { faker } from '@faker-js/faker';
 import { v4 as uuidv4 } from 'uuid';
 
-export class WalletRepository {
-  save() {
-    console.log('check me');
-  }
-
-  find = jest.fn(() => [
+export const WalletRepository = {
+  find: jest.fn(() => [
     {
       id: uuidv4(),
       balance: faker.random.numeric(),
@@ -27,9 +23,9 @@ export class WalletRepository {
         };
       },
     },
-  ]);
+  ]),
 
-  findOne = jest.fn(() => ({
+  findOne: jest.fn(() => ({
     id: uuidv4(),
     balance: faker.random.numeric(),
     currency: 'NGN',
@@ -48,11 +44,11 @@ export class WalletRepository {
         status: true,
       };
     },
-  }));
-}
+  })),
+};
 
-export class WalletsServiceMock {
-  getWallets = jest.fn(() => [
+export const WalletsServiceMock = {
+  getWallets: jest.fn((user) => [
     {
       id: uuidv4(),
       balance: faker.random.numeric(),
@@ -73,28 +69,47 @@ export class WalletsServiceMock {
         };
       },
     },
-  ]);
+  ]),
 
-  getWallet(id, user) {
-    return jest.fn(() => ({
-      id: uuidv4(),
-      balance: faker.random.numeric(),
-      currency: 'NGN',
-      transfer: true,
-      symbol: '₦',
-      flag: '🇳🇬',
-      status: true,
-      toJSON: function () {
-        return {
-          id: uuidv4(),
-          balance: faker.random.numeric(),
-          currency: 'NGN',
-          transfer: true,
-          symbol: '₦',
-          flag: '',
-          status: true,
-        };
-      },
-    }));
-  }
-}
+  getWallet: jest.fn((id, user) => ({
+    id: uuidv4(),
+    balance: faker.random.numeric(),
+    currency: 'NGN',
+    transfer: true,
+    symbol: '₦',
+    flag: '🇳🇬',
+    status: true,
+    toJSON: function () {
+      return {
+        id: uuidv4(),
+        balance: faker.random.numeric(),
+        currency: 'NGN',
+        transfer: true,
+        symbol: '₦',
+        flag: '',
+        status: true,
+      };
+    },
+  })),
+
+  getSingleWalletQuery: jest.fn((query) => ({
+    id: uuidv4(),
+    balance: faker.random.numeric(),
+    currency: 'NGN',
+    transfer: true,
+    symbol: '₦',
+    flag: '🇳🇬',
+    status: true,
+    toJSON: function () {
+      return {
+        id: uuidv4(),
+        balance: faker.random.numeric(),
+        currency: 'NGN',
+        transfer: true,
+        symbol: '₦',
+        flag: '',
+        status: true,
+      };
+    },
+  })),
+};

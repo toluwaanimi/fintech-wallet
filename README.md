@@ -117,6 +117,18 @@ yarn add
       npm run start
          ```
 
+* To run your E2E Test
+    * ```markdown
+      npm run test:e2e
+         ```
+
+
+
+* To run your Test
+    * ```markdown
+      npm run test
+         ```
+
 ---
 
 ## Implementation Required
@@ -127,4 +139,7 @@ To run a docker image of Postgres and RabbitMQ
 ```markdown 
       docker-compose up
       ``
+
+
+
 

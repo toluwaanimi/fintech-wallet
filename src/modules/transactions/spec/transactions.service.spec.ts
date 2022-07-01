@@ -72,7 +72,7 @@ describe('TransactionsService', () => {
         },
         {
           provide: WalletsService,
-          useClass: WalletsServiceMock,
+          useValue: WalletsServiceMock,
         },
       ],
     }).compile();

@@ -11,6 +11,7 @@ import { JwtHelper } from '../../common/helpers/jwt.helper';
 import { IServiceResponse } from '../../common/interfaces/service.interface';
 import { User } from '../../models/user.entity';
 import { UserWallets } from '../../models/wallet.entity';
+import { IUser } from '../../common/interfaces/user.interface';
 
 @Injectable()
 export class UsersService {
@@ -137,7 +138,7 @@ export class UsersService {
     }
   }
 
-  async getProfile(user: User): Promise<IServiceResponse> {
+  async getProfile(user: IUser): Promise<IServiceResponse> {
     const account = await this.userRepository.findOne({
       where: {
         id: user.id,
@@ -153,7 +154,7 @@ export class UsersService {
 
   async changePassword(
     payload: { old_password: any; password: any },
-    user: User,
+    user: IUser,
   ): Promise<IServiceResponse> {
     if (!bcrypt.compareSync(payload.old_password, user.password)) {
       throw new BadRequestException('Invalid old password');
@@ -170,8 +171,8 @@ export class UsersService {
   }
 
   async setTransactionPin(
-    payload: { pin: any },
-    user: User,
+    payload: { pin: string },
+    user: IUser,
   ): Promise<IServiceResponse> {
     if (!!user.transaction_pin) {
       throw new BadRequestException('already created transaction pin');
@@ -190,7 +191,7 @@ export class UsersService {
 
   async updateTransactionPin(
     payload: { old_pin: any; pin: any },
-    user: User,
+    user: IUser,
   ): Promise<IServiceResponse> {
     if (!bcrypt.compareSync(payload.old_pin, user.transaction_pin)) {
       throw new BadRequestException('Wrong old pin');

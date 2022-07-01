@@ -3,6 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 
 import { FindCondition, Repository } from 'typeorm';
 import { IServiceResponse } from '../../common/interfaces/service.interface';
+import { IUser } from '../../common/interfaces/user.interface';
 import { AppLogger } from '../../common/logger/logger';
 import { User } from '../../models/user.entity';
 import { UserWallets } from '../../models/wallet.entity';
@@ -14,7 +15,7 @@ export class WalletsService {
     private readonly walletRepository: Repository<UserWallets>,
   ) {}
 
-  async getWallets(user: User): Promise<IServiceResponse> {
+  async getWallets(user: IUser): Promise<IServiceResponse> {
     const wallets = await this.walletRepository.find({
       where: {
         userId: user.id,
@@ -25,7 +26,7 @@ export class WalletsService {
     };
   }
 
-  async getWallet(walletId: string, user: User): Promise<IServiceResponse> {
+  async getWallet(walletId: string, user: IUser): Promise<IServiceResponse> {
     try {
       const wallet = await this.walletRepository.findOne({
         where: {
