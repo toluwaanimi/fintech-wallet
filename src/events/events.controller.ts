@@ -14,7 +14,7 @@ export class EventsController {
     try {
       await MailerIntegration.sendMailUsingMailer({
         to: payload.sender_email,
-        text: `You have sent $ ${payload.amount} to ${payload.receiver_name} 💸`,
+        text: `You have sent ₦${payload.amount} to ${payload.receiver_name} 💸`,
         subject: 'Transfer successful 💸',
       });
       channel.ack(originalMsg);
@@ -31,7 +31,7 @@ export class EventsController {
     try {
       await MailerIntegration.sendMailUsingMailer({
         to: payload.to_email,
-        text: `You have received $ ${payload.amount} to ${payload.sender_name}`,
+        text: `You have received ₦${payload.amount} to ${payload.sender_name}`,
         subject: 'Deposit received',
       });
       channel.ack(originalMsg);
