@@ -1,17 +1,29 @@
 version: '3' 
 services:
-  db:
-    container_name: pg_container
+  lazerpay_main:
+    container_name: lazerpay
     image: postgres:13
     restart: always
     environment:
+      POSTGRES_DB: lazerpay
       POSTGRES_USER: root
-      POSTGRES_PASSWORD: root
+      POSTGRES_PASSWORD: password
     ports:
       - "5432:5432"
     volumes:
-      - pg-dataset:/var/lib/postgresql/data
-      
+      - lazerpay_main:/var/lib/postgresql/data
+  lazerpay_test:
+    container_name: lazerpay_test
+    image: postgres:13
+    restart: always
+    environment:
+      POSTGRES_DB: lazerpay_test
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: password
+    ports:
+      - "5431:5432"
+    volumes:
+      - lazerpay_test:/var/lib/postgresql/data
   rabbitmq:
     image: 'rabbitmq:3.6-management-alpine'
     ports:
@@ -20,4 +32,12 @@ services:
       # HTTP management UI
       - '15672:15672'
     networks:
-      - network
+      - rabbitmq_go_net
+
+volumes:
+  lazerpay_main:
+  lazerpay_test:
+
+networks:
+  rabbitmq_go_net:
+    driver: bridge

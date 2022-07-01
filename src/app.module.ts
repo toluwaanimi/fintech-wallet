@@ -29,6 +29,11 @@ const SnakeNamingStrategy =
           process.env.NODE_ENV === 'staging' ||
           process.env.NODE_ENV === 'development',
       },
+      cli: {
+        entitiesDir: 'src/models',
+        migrationsDir: 'src/migrations',
+        subscribersDir: 'src/subscribers',
+      },
     }),
   ],
   controllers: [],

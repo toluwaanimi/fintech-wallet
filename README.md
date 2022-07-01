@@ -76,10 +76,21 @@ project and replace with your credentials
 
 ### OR
 
-Create a .env file in the root directory and add your databae details. It should have the following properties
+Create a .env file in the root directory and add your database details. It should have the following properties
 
 ```markdown
-DATABASE_HOST= DATABASE_USERNAME= DATABASE_PASSWORD= DATABASE_NAME= DATABASE_PORT=
+NODE_ENV=local
+PORT=4051
+JWT_SECRET=JWT_SECRET
+
+#rabbitmq
+RABBITMQ_URL=amqp://guest:guest@localhost:5672
+RABBITMQ_QUEUE_NAME=lazer_event
+RABBITMQ_NOTIFICATION=NOTIFICATION_SERVICE
+
+#postgres
+DB_URL=postgresql://root:password@localhost/lazerpay
+TEST_DB_URL=postgres://localhost/lazer_test
 ```
 
 Kindly replace these values with the appropriate values based on your Database environment
