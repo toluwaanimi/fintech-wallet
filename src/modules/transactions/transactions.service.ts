@@ -104,12 +104,12 @@ export class TransactionsService {
       throw new BadRequestException('Insufficient balance');
     }
 
-    const userBalanceCalulator = await Helper.calculateBalanceAfter(
+    const userBalanceCalulator = await Helper.calculateDebitBalanceAfter(
       senderWallet.balance,
       data.amount,
     );
 
-    const receiverBalanceCalulator = await Helper.calculateBalanceAfter(
+    const receiverBalanceCalulator = await Helper.calculateCreditBalanceAfter(
       receiverWallet.balance,
       data.amount,
     );
