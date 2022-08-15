@@ -1,6 +1,6 @@
-# LazerPay
+# Fintech App
 
-## Documentation of LazerPay
+## Documentation of Fintech App
 
 ## Author 🚀
 
@@ -85,12 +85,12 @@ JWT_SECRET=JWT_SECRET
 
 #rabbitmq
 RABBITMQ_URL=amqp://guest:guest@localhost:5672
-RABBITMQ_QUEUE_NAME=lazer_event
+RABBITMQ_QUEUE_NAME=event
 RABBITMQ_NOTIFICATION=NOTIFICATION_SERVICE
 
 #postgres
-DB_URL=postgresql://root:password@localhost/lazerpay
-TEST_DB_URL=postgres://localhost/lazer_test
+DB_URL=postgresql://root:password@localhost/pay
+TEST_DB_URL=postgres://localhost/test
 ```
 
 Kindly replace these values with the appropriate values based on your Database environment
@@ -98,7 +98,7 @@ Kindly replace these values with the appropriate values based on your Database e
 
 ## Start Development
 
-Kindly clone the repo `https://github.com/toluwaanimi/lazerpay.git`
+Kindly clone the repo `https://github.com/toluwaanimi/Fintech-wallet.git`
 
 ### Installation
 
